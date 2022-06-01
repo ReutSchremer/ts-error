@@ -54,6 +54,14 @@ const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   </div>
 }
 
+const WrapperWithMoreProps: React.FC<{ children: React.ReactNode, name: string }> = ({ children, name }) => {
+  console.log("NAME", name);
+  return <div>
+    {children}
+  </div>
+}
+
+
 function App() {
   return (
     <div className="App">
@@ -75,4 +83,16 @@ function App() {
   );
 }
 
-export default provide(Wrapper)(App);
+export default provide(Wrapper, [WrapperWithMoreProps, { name: "Test" }])(App);
+
+/**
+ * Its just like rendering:
+ * 
+ * <Wrapper>
+ *  <WrapperWithMoreProps name="test">
+ *    <App/>
+ *  </WrapperWithMoreProps>
+ * </Wrapper>
+ *  * 
+ */
+
